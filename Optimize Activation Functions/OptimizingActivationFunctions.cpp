@@ -3,9 +3,8 @@
 #include<armadillo>
 using namespace std;
 
-void LogisticTimeDifference()
+void LogisticTimeDifference(arma::colvec x)
 {
-  const arma::colvec x("-1 1 1 -1 1 -1 1 0");
   auto start1 = chrono::high_resolution_clock::now();
   for (int i = 0; i < 1000000; i++)
   {
@@ -36,9 +35,8 @@ void LogisticTimeDifference()
   cout << "---------------------------" << endl;
 }
 
-void LogisticDerivativeTimeDifference()
+void LogisticDerivativeTimeDifference(arma::colvec x)
 {
-  const arma::colvec x("-1 1 1 -1 1 -1 1 0");
   auto start1 = chrono::high_resolution_clock::now();
   for (int i = 0; i < 1000000; i++)
   {
@@ -52,9 +50,9 @@ void LogisticDerivativeTimeDifference()
        << " sec " << endl;
 
   auto start2 = chrono::high_resolution_clock::now();
-  for (int i = 0; i < 1000000; i++)
+  for (int i = 0; i < 1000000 ; i++)
   {
-    arma::colvec output(x.n_elem);
+    arma::colvec output(arma::size(x));
     for (size_t j = 0; j < x.n_elem; j++)
     {
       output(j) = x(j) * (1.0 - x(j));
@@ -69,9 +67,8 @@ void LogisticDerivativeTimeDifference()
   cout << "---------------------------" << endl;
 }
 
-void MishTimeDifference()
+void MishTimeDifference(arma::colvec x)
 {
-  const arma::colvec x("-1 1 1 -1 1 -1 1 0");
   auto start1 = chrono::high_resolution_clock::now();
   for (int i = 0; i < 1000000; i++)
   {
@@ -104,9 +101,9 @@ void MishTimeDifference()
   cout << "---------------------------" << endl;
 }
 
-void MishDerivativeTimeDifference()
+void MishDerivativeTimeDifference(arma::colvec x)
 {
-  const arma::colvec x("-1 1 1 -1 1 -1 1 0");
+  
   auto start1 = chrono::high_resolution_clock::now();
   for (int i = 0; i < 1000000; i++)
   {
@@ -139,9 +136,8 @@ void MishDerivativeTimeDifference()
   cout << "---------------------------" << endl;
 }
 
-void SoftPlusDerivativeTimeDifference()
+void SoftPlusDerivativeTimeDifference(arma::colvec x)
 {
-  const arma::colvec x("-1 1 1 -1 1 -1 1 0");
   auto start1 = chrono::high_resolution_clock::now();
   for (int i = 0; i < 1000000; i++)
   {
@@ -172,9 +168,8 @@ void SoftPlusDerivativeTimeDifference()
   cout << "---------------------------" << endl;
 }
 
-void SoftSignDerivativeTimeDifference()
+void SoftSignDerivativeTimeDifference(arma::colvec x)
 {
-  const arma::colvec x("-1 1 1 -1 1 -1 1 0");
   auto start1 = chrono::high_resolution_clock::now();
   for (int i = 0; i < 1000000; i++)
   {
@@ -205,9 +200,8 @@ void SoftSignDerivativeTimeDifference()
   cout << "---------------------------" << endl;
 }
 
-void SwishTimeDifference()
+void SwishTimeDifference(arma::colvec x)
 {
-  const arma::colvec x("-1 1 1 -1 1 -1 1 0");
   auto start1 = chrono::high_resolution_clock::now();
   for (int i = 0; i < 1000000; i++)
   {
@@ -243,11 +237,13 @@ void SwishTimeDifference()
 
 int main()
 {
-  LogisticTimeDifference();
-  LogisticDerivativeTimeDifference();
-  MishTimeDifference();
-  MishDerivativeTimeDifference();
-  SoftPlusDerivativeTimeDifference();
-  SwishTimeDifference();
+  arma::colvec x;
+  x.randn(1000);
+  LogisticTimeDifference(x);
+  LogisticDerivativeTimeDifference(x);
+  MishTimeDifference(x);
+  MishDerivativeTimeDifference(x);
+  SoftPlusDerivativeTimeDifference(x);
+  SwishTimeDifference(x);
   return 0;
 }

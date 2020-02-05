@@ -1,18 +1,18 @@
-Time taken by current logistic implementation is : 0.261238 sec 
-Time taken by new logistic implementation is : 0.13508 sec 
+Time taken by current logistic implementation is : 22.1209 sec 
+Time taken by new logistic implementation is : 16.264 sec 
 ---------------------------
-Time taken by current logistic derivative implementation is : 0.1199 sec 
-Time taken by new logistic derivative implementation is : 0.10607 sec 
+Time taken by current logistic derivative implementation is : 7.5022 sec 
+Time taken by new logistic derivative implementation is : 12.297 sec 
 ---------------------------
-Time taken by current mish implementation is : 0.82375 sec 
-Time taken by new mish implementation is : 0.36454 sec 
+Time taken by current mish implementation is : 74.014 sec 
+Time taken by new mish implementation is : 51.142 sec 
 ---------------------------
-Time taken by current mish derivative implementation is : 1.6175 sec 
-Time taken by new mish derivative implementation is : 0.78767 sec 
+Time taken by current mish derivative implementation is : 151.64 sec 
+Time taken by new mish derivative implementation is : 109.07 sec 
 ---------------------------
-Time taken by current soft plus derivative implementation is : 0.25477 sec 
-Time taken by new soft plus derivative implementation is : 0.133 sec 
+Time taken by current soft plus derivative implementation is : 21.437 sec 
+Time taken by new soft plus derivative implementation is : 16.815 sec 
 ---------------------------
-Time taken by current swish derivative implementation is : 0.87924 sec 
-Time taken by new swish derivative implementation is : 0.34214 sec 
+Time taken by current swish derivative implementation is : 84.394 sec 
+Time taken by new swish derivative implementation is : 47.294 sec 
 ---------------------------
