@@ -1,0 +1,12 @@
+Time taken by new swish implementation is : 0.284719 sec 
+Time taken by current swish implementation is : 1.638e+08 sec 
+---------------------------
+Time taken by new hard_sigmoid implementation is : 0.29068 sec 
+Time taken by current hard_sigmoid implementation is : 1.6431e+08 sec 
+---------------------------
+Time taken by new soft_plus implementation is : 0.6745 sec 
+Time taken by current soft_plus implementation is : 2.1092e+08 sec 
+---------------------------
+Time taken by new soft_sign implementation is : 0.63491 sec 
+Time taken by current soft_sign implementation is : 1.4582e+08 sec 
+---------------------------
