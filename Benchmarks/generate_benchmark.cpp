@@ -72,7 +72,7 @@ void GenerateBenchmarks()
   arma::mat x2;
   for (int i = 1; i <= 1000; i *= 10)
   {
-    x2.randn(i,2);
+    x2.randn(i,i / 10 + 1);
     GetBenchmarks(x2, i, "Matrix");
   }
 }
