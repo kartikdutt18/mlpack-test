@@ -91,3 +91,6 @@ Mish,Simple,1000,Matrix,507.519
 SoftPlus,Armadillo,1000,Matrix,454.222
 SoftPlus,Simple,1000,Matrix,332.433
 SoftSign,Armadillo,1000,Matrix,367.648
+SoftSign,Simple,1000,Matrix,233.357
+Swish,Armadillo,1000,Matrix,247.235
+Swish,Simple,1000,Matrix,210.063

@@ -10,12 +10,16 @@ Original file is located at
 from google.colab import files
 files.upload()
 
+files.upload()
+
 import pandas as pd
 import math
 
-dataset = pd.read_csv('./results.csv', names = ['Activation-Function', 'Function-Type','Input-Size', 'Input-Type', 'Time-Taken (sec)'])
+dataset_without_blas = pd.read_csv('./results.csv', names = ['Activation-Function', 'Function-Type','Input-Size', 'Input-Type', 'Time-Taken (sec)'])
 
-dataset.tail(5)
+dataset_with_blas = pd.read_csv('./results_with_blas.csv', names = ['Activation-Function', 'Function-Type','Input-Size', 'Input-Type', 'Time-Taken (sec)'])
+
+dataset_with_blas.tail(5)
 
 import matplotlib.pyplot as plt
 
@@ -37,8 +41,6 @@ class ActivationFunction:
     elif functionType == "Armadillo" and inputType == "Matrix":
       self.armadilloMatList[int(math.log10(inSize))] = timeTaken
 
-inputSize = [1, 10, 100, 1000]
-
 HardSigmoid = ActivationFunction('HardSigmoid')
 Logistic = ActivationFunction('Logistic')
 Mish = ActivationFunction('Mish')
@@ -51,39 +53,53 @@ functionDictionary = {
     'Logistic': Logistic,
     'Mish':Mish,
     'SoftPlus':SoftPlus,
+    'SoftSign':SoftSign,
     'Swish':Swish
 }
 
-def buildDataset():
+def buildDataset(dataset):
   for i in range(len(dataset)):
     functionDictionary[dataset.loc[i][0]].addStep(dataset.loc[i][1],dataset.loc[i][2], dataset.loc[i][3], dataset.loc[i][4])
   print("Build Successful!")
 
-buildDataset()
+import os
+inputSize = [1, 10, 100, 1000]
+inputSize = [1, 20, 1100, 101000]
+if not os.path.exists('./images'):
+  os.mkdir('./images')
 
-def plot(obj):
-  plt.figure(1)
+def plot(obj, blasOpt, i):
+  plt.figure(i)
   plt.plot(inputSize, obj.simpleVectorList, label='simple')
   plt.plot(inputSize, obj.armadilloVectorList, label='armadillo')
   plt.ylabel('Time')
   plt.xlabel('InputSize')
-  plt.title(obj.name + '_with_vector')
+  plt.title(obj.name + '_with_vector' + blasOpt)
   plt.legend()
-  plt.figure(2)
+  plt.savefig('./images/'+obj.name + '_with_vector' + blasOpt + '.png')
+  plt.figure(i + 1)
   plt.plot(inputSize, obj.simpleMatList, label='simple')
   plt.plot(inputSize, obj.armadilloMatList, label='armadillo')
-  plt.title(obj.name + '_with_matrix')
+  plt.title(obj.name + '_with_matrix' + blasOpt)
   plt.ylabel('Time')
   plt.xlabel('InputSize')
   plt.legend()
+  plt.savefig('./images/'+obj.name + '_with_matrix' + blasOpt + '.png')
 
-plot(HardSigmoid)
+def plotGraphs(blasOpt):
+  plot(HardSigmoid, blasOpt, 1)
+  plot(Logistic, blasOpt, 3)
+  plot(Mish, blasOpt, 5)
+  plot(SoftPlus, blasOpt, 7)
+  plot(Swish, blasOpt, 9)
 
-plot(Logistic)
+buildDataset(dataset_without_blas)
+plotGraphs('_without_blas')
 
-plot(Mish)
+buildDataset(dataset_with_blas)
+plotGraphs('_with_blas')
 
-plot(SoftPlus)
+!zip -r ./images.zip ./images
 
-plot(Swish)
+files.download('images.zip')
 
